@@ -510,7 +510,7 @@ def overall_trend_money_by_year():
 def each_prod_monthly_review():
     dict_description = {
         'A':'''- this is description<br>
-        blah<br>
+        blue<br>
         blah''', # - exp
         'B':'# this is description', # title 1 (bolded)
         'C':'** this is description **', # just bolded exp
