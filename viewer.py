@@ -266,18 +266,18 @@ def total_relationship():
 
 def overall_trend_quantity_by_month():
 
-    Month = ['January,2016',  'May, 2016', 'September,2016',
-    'January,2017', 'May, 2017', 'September,2017',
-    'January,2018', 'May, 2018', 'September,2018',
-    'January,2019', 'May, 2019', 'September,2019','December,2019'
+    Month = ['Jan,2016',  'May, 2016', 'Sep,2016',
+    'Jan,2017', 'May, 2017', 'Sep,2017',
+    'Jan,2018', 'May, 2018', 'Sep,2018',
+    'Jan,2019', 'May, 2019', 'Sep,2019','Dec,2019'
     ]
 
 
     empty = []
     for i in ['A','B','C','D','E','F']:
-            df_data = pd.read_excel('~/Desktop/Coeff_File.xlsx',sheet_name = i, header = 1)
+            df_data = pd.read_excel('data.xlsx',sheet_name = i, header = 1)
             df_data = df_data.dropna(axis=1)
-
+            df_data=df_data[:48]
             month= df_data.index               # Output : RangeIndex (start=0,stop=60,step=1)
             x_input = [[x,1] for x in month]   # Output : [[0,1],[1,1]..]
 
@@ -323,18 +323,18 @@ def overall_trend_quantity_by_month():
 
 def overall_trend_net_sales_by_month():
 
-    Month = ['January,2016',  'May, 2016', 'September,2016',
-    'January,2017', 'May, 2017', 'September,2017',
-    'January,2018', 'May, 2018', 'September,2018',
-    'January,2019', 'May, 2019', 'September,2019','December,2019'
+    Month = ['Jan,2016',  'May, 2016', 'Sep,2016',
+    'Jan,2017', 'May, 2017', 'Sep,2017',
+    'Jan,2018', 'May, 2018', 'Sep,2018',
+    'Jan,2019', 'May, 2019', 'Sep,2019','Dec,2019'
     ]
 
 
     empty = []
     for i in ['A','B','C','D','E','F']:
-            df_data = pd.read_excel('~/Desktop/Coeff_File.xlsx',sheet_name = i, header = 1)
+            df_data = pd.read_excel('data.xlsx',sheet_name = i, header = 1)
             df_data = df_data.dropna(axis=1)
-
+            df_data=df_data[:48]
             month= df_data.index               # Output : RangeIndex (start=0,stop=60,step=1)
             x_input = [[x,1] for x in month]   # Output : [[0,1],[1,1]..]
 
@@ -382,18 +382,13 @@ def overall_trend_net_sales_by_month():
 def overall_trend_quantity_by_year():
 
     def calc_sales (sheet_name):
-        df_data = pd.read_excel('~/Desktop/Coeff_File.xlsx',sheet_name = sheet_name, header = 1)
+        df_data = pd.read_excel('data.xlsx',sheet_name = sheet_name, header = 1)
         df_data = df_data.dropna(axis=1)
-        first_yr = df_data.iloc[:12, [1]].sum()
-        first_yr = first_yr.iloc[0]
-        second_yr = df_data.iloc[12:24, [1]].sum()
-        second_yr = second_yr.iloc[0]
-        third_yr = df_data.iloc[24:36, [1]].sum()
-        third_yr = third_yr.iloc[0]
-        fourth_yr = df_data.iloc[36:48, [1]].sum()
-        fourth_yr = fourth_yr.iloc[0]
-        Y= [first_yr,second_yr,third_yr,fourth_yr]
-        return Y
+        Y= df_data['Total'].values
+        Yzip=[]
+        for i in range (4):
+            Yzip.append(Y[i*12:(i+1)*12].sum())
+        return Yzip
 
     year=list(range(2016,2020))
     list_yearly_sales = []
@@ -446,18 +441,13 @@ def overall_trend_quantity_by_year():
 def overall_trend_money_by_year():
 
     def calc_sales (sheet_name):
-        df_data = pd.read_excel('~/Desktop/Coeff_File.xlsx',sheet_name = sheet_name, header = 1)
+        df_data = pd.read_excel('data.xlsx',sheet_name = sheet_name, header = 1)
         df_data = df_data.dropna(axis=1)
-        first_yr = df_data.iloc[:12, [2]].sum()
-        first_yr = first_yr.iloc[0]
-        second_yr = df_data.iloc[12:24, [2]].sum()
-        second_yr = second_yr.iloc[0]
-        third_yr = df_data.iloc[24:36, [2]].sum()
-        third_yr = third_yr.iloc[0]
-        fourth_yr = df_data.iloc[36:48, [2]].sum()
-        fourth_yr = fourth_yr.iloc[0]
-        Y= [first_yr,second_yr,third_yr,fourth_yr]
-        return Y
+        Y= df_data['Sales'].values
+        Yzip=[]
+        for i in range (4):
+            Yzip.append(Y[i*12:(i+1)*12].sum())
+        return Yzip
 
     year=list(range(2016,2020))
     list_yearly_sales = []
@@ -465,8 +455,7 @@ def overall_trend_money_by_year():
 
     for i in sheet_name:
         list_yearly_sales.append(calc_sales(i))
-    A=list_yearly_sales[0]; B=list_yearly_sales[1]; C=list_yearly_sales[2]
-    D=list_yearly_sales[3]; E=list_yearly_sales[4]; F=list_yearly_sales[5]
+    A,B,C,D,E,F = list_yearly_sales
     
     fig = px.line(
             x=year, 
@@ -519,18 +508,19 @@ def each_prod_monthly_review():
         'F':'this is description'} # just text
 
     Month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November','December']
-    Year = ['2016','2017','2018','2019']
+    Year = ['2016','2017','2018','2019','2020']
+
     for i in ['A','B','C','D','E','F']:
-        df_data = pd.read_excel('~/Desktop/Coeff_File.xlsx',sheet_name = i , header = 1)
+        df_data = pd.read_excel('data.xlsx',sheet_name = i , header = 1)
         df_data = df_data.dropna(axis=1)
         for month_year in df_data.index:
             df_data.loc[month_year, 'Year' ] = Year[month_year // 12 ]
             df_data.loc[month_year, 'Month'] = Month[month_year % 12]
         df = df_data[['Month','Year','Total','Ave. Unit Price','Sales']]  # use df.map to merge two columns (month+year)
         x = np.array(Month)
-        Y = df['Total'].values
+        Y = df['Sales'].values
         Y = np.reshape(Y, (-1, 12))
-        y1,y2,y3,y4 = Y
+        y1,y2,y3,y4,y5 = Y
 
         table_trace1 = go.Table(
             domain=dict(x=[0, 0.4],
@@ -594,6 +584,17 @@ def each_prod_monthly_review():
             line=dict(width=2, color='#af7bbd')
         )
 
+        trace5=go.Scatter(
+            name='2020',
+            x=x,
+            y=y5,
+            xaxis='x',
+            yaxis='y',
+            mode='lines',
+            line=dict(width=2, color='blue')
+        )
+
+
         axis=dict(
             showline=True,
             zeroline=False,
@@ -608,13 +609,12 @@ def each_prod_monthly_review():
             width=1300,
             height=550,
             autosize=False,
-            title=f'Product {i} : Sales Data',
+            title=f'Product {i} : Net Sales Data',
             margin = dict(t=100),
             
-
             xaxis1=dict(axis, **dict(domain=[0.45, 1.0], anchor='y')),
 
-            yaxis1=dict(axis, **dict(domain=[0, 1.0], anchor='x', hoverformat='.2f')),
+            yaxis1=dict(axis, **dict(domain=[0, 1.0], anchor='x', hoverformat='.2f',title='<b> Net Sales</b> (k€)',title_standoff = 0.5)),
 
             plot_bgcolor='rgba(228, 222, 249, 0.65)'
         )
