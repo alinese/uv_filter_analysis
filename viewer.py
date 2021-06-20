@@ -959,7 +959,7 @@ def W_Sales_Overview():
     Since A and F have the biggest W values of roughly W_Net_Sales= 330 and W_cCM1= 270, Product A and F are considered the determining factors for both net sales and cCM1, and thus the most salable products. Followed by W_Net_Sales=273 and W_cCM1=152, Product D is the next driving component, with Product C and B followed next. Note that B and C have relatively smaller W values compared to the other products, or even a negative value if present, which deviates from the highest W value by 10 times. From this, it can be deduced that two types of error — system and measurement — may be present in the modeled system. <br>
     <br>""", unsafe_allow_html=True)
     st.markdown("""
-    - System Error from Linearity Assumption: For simplicity of the analysis, the assumption of “linear regression model assumes that the relationship between the dependent variable y and the p-vector of regressors x is linear.” (citation) is made. However, no real system is in fact linear; numerous other aspects should have been considered such as sales price, currency, etc. <br>
+    - System Error from Linearity Assumption: For simplicity of the analysis, the assumption of “linear regression model assumes that the relationship between the dependent variable y and the p-vector of regressors x is linear.” (Wikipedia, n.d.) is made. However, no real system is in fact linear; numerous other aspects should have been considered such as sales price, currency, etc. <br>
     <br>    
     - Measurement Error from Inaccurate data input: There could have been a discrepancy between the time for the sales data entry and the time when the actual product was delivered and used by the customer. This creates an inconsistency in the measured data and shifts the sales data off from where the data should have been placed. <br>
     The larger deviation of the data infers that the data are influenced more heavily by the errors. 
@@ -1638,11 +1638,11 @@ with st.beta_expander ("See Description for Linear Regression"):
     > , where 
     > > -	y  is a vector of observed values of the variable called the regressand, endogenous variable, response variable, measured variable, criterion variable, or dependent variable. This variable is also sometimes known as the predicted variable, but this should not be confused with predicted values, which are denoted ŷ.
     >
-    > > -	X may be seen as a matrix of row-vectors x_i or of n-dimensional column-vectors X_j, which are known as regressors, exogenous variables, explanatory variables, covariates, input variables, predictor variables, or independent variables (not to be confused with the concept of independent random variables). 
+    > > -	X may be seen as a matrix of row-vectors x<sub>i</sub> or of n-dimensional column-vectors X<sub>j</sub>, which are known as regressors, exogenous variables, explanatory variables, covariates, input variables, predictor variables, or independent variables (not to be confused with the concept of independent random variables). 
     >
-    > > - β is a (p+1) -dimensional parameter vector, where 〖_0〗 is the intercept term (if one is included in the model—otherwise β is p-dimensional). Its elements are known as effects or regression coefficients (although the latter term is sometimes reserved for the estimated effects).
+    > > - β is a (p+1) -dimensional parameter vector, where 〖<sub>0</sub>〗 is the intercept term (if one is included in the model—otherwise β is p-dimensional). Its elements are known as effects or regression coefficients (although the latter term is sometimes reserved for the estimated effects).
     >
-    > > - ε is a vector of values ε_i. This part of the model is called the error term, disturbance term, or sometimes noise.
+    > > - ε is a vector of values ε<sub>i</sub>. This part of the model is called the error term, disturbance term, or sometimes noise.
     >
     <br>
     > Linear regression has many practical uses. Most applications fall into one of the following two broad categories: 
